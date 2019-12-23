@@ -1,12 +1,12 @@
 import React from 'react';
 
-const data = { newsFeeds:[] };
+const data = { photoFeeds:[] };
 for (var i = 1; i < 16; i++) {
-  data.newsFeeds.push({
+  data.photoFeeds.push({
     id: i, 
     title: `This Is Title ${i}`, 
     content: `This is content ${i}`, 
-    image: `https://picsum.photos/400/200?random&img=${Math.floor(Math.random() * 10) + 1}`, 
+    image: `https://picsum.photos/400/200?random&img=${Math.floor(Math.random() * 100) + 1}`, 
     tags: i%2 === 0 ? ['AAA','BBB']:['CCC','DDD']})
 } 
 
@@ -21,7 +21,7 @@ export const FeedsContext = React.createContext(data);
 // export const FeedsProvider = props => {
 
 //   const data =  { 
-//     newsFeeds:[
+//     photoFeeds:[
 //       {id:1, title:'This Is Title 1', content:'This is content 1', image:'https://picsum.photos/400/200'},
 //       {id:2, title:'This Is Title 2', content:'This is content 2', image:'https://picsum.photos/400/200'},
 //       {id:3, title:'This Is Title 3', content:'This is content 3', image:'https://picsum.photos/400/200'},

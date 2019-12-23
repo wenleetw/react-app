@@ -2,7 +2,8 @@ import React, {useState, useContext, useEffect, useRef} from 'react';
 import { FeedsContext } from '../context/feedsContext';
 import Filter from './filter';
 import Spinner from 'react-bootstrap/Spinner';
-
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button'
 
 const Shelf = () => {
   const initailFeeds = useContext(FeedsContext);
@@ -13,8 +14,9 @@ const Shelf = () => {
   }, []);
 
   const handleInputChange = (event) => {
-    let filtedData = feeds.newsFeeds.filter(el => {
-      if (el.title.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1) {
+    let filtedData = feeds.photoFeeds.filter(el => {
+      if ((el.title.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1) ||
+        (el.content.toLowerCase().indexOf(event.target.value.toLowerCase()) > -1)) {
         return el;
       }
     })
@@ -23,7 +25,7 @@ const Shelf = () => {
     if (event.target.value === '') {
       setTimeout(() => setFeeds(initailFeeds), 500);
     } else {
-      setTimeout(() => setFeeds({newsFeeds : filtedData}), 500);
+      setTimeout(() => setFeeds({photoFeeds : filtedData}), 500);
     } 
   }
 
@@ -62,7 +64,7 @@ const Shelf = () => {
 const ItemList = ({items}) => {
   return (
     <div className="row">
-    {items.newsFeeds.map(article => (
+    {items.photoFeeds.map(article => (
       <Item key={ article.id } article={article}/>
     ))}
   </div>
@@ -71,13 +73,43 @@ const ItemList = ({items}) => {
 
 const Item = ({article}) => {
   return (
-    <div key={article.id} className="col-6 col-sm-4 p-1">
+    <div key={article.id} className="col-6 col-sm-4 p-1" >
       <h3>{article.title}</h3>
-      <img src={`${article.image}?random&img=${article.id}`} alt={article.title}></img>
+      <img src={`${article.image}`} alt={article.title}></img>
       {/* <Spinner animation="border" variant="primary" /> */}
       <p>{article.content}</p>
    </div>
   )
 }
+
+// const handleModalOpen = () => {
+//   const [show, setShow] = useState(false);
+
+//   const handleClose = () => setShow(false);
+//   const handleShow = () => setShow(true);
+
+//   return (
+//     <>
+//       <Button variant="primary" onClick={handleShow}>
+//         Launch demo modal
+//       </Button>
+
+//       <Modal show={show} onHide={handleClose}>
+//         <Modal.Header closeButton>
+//           <Modal.Title>Modal heading</Modal.Title>
+//         </Modal.Header>
+//         <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+//         <Modal.Footer>
+//           <Button variant="secondary" onClick={handleClose}>
+//             Close
+//           </Button>
+//           <Button variant="primary" onClick={handleClose}>
+//             Save Changes
+//           </Button>
+//         </Modal.Footer>
+//       </Modal>
+//     </>
+//   );
+// }
 
 export default Shelf;

@@ -3,25 +3,29 @@ import { initalContext, FeedsContext } from '../context/feedsContext';
 
 const Filter = props => {
   const [feeds, setFeeds] = useContext(FeedsContext);
+  //const [feeds, setFeeds] = useState([feeds, setFeeds] ) 
   const [lastTag, setLastTag] = useState("");
 
   useEffect(() => {
   }, []);
 
   const handleButtonClick = (event) => {
+    //  console.log('initalContext', {...initalContext});
+    
+    setFeeds({...initalContext});
     if (event.target.value === lastTag){
-      setLastTag("");
-      setFeeds(initalContext);
+      setLastTag((feeds) => "");
       return;
     }
 
-    let filtedData = feeds.newsFeeds.filter(el => {
+    //setFeeds(initalContext);
+    let filtedData = feeds.photoFeeds.filter(el => {
       //console.log(el)
       return el.tags.includes(event.target.value);
     })
     setLastTag(event.target.value);
     //console.log(filtedData);
-    setFeeds({newsFeeds: filtedData});
+    setFeeds({ photoFeeds: filtedData });
   }
 
   const handleResetClick = (event) => {
@@ -31,7 +35,7 @@ const Filter = props => {
 
   return (
     <div className="container">
-      {/* <h1>{feeds.newsFeeds.length}</h1> */}
+      {/* <h1>{feeds.photoFeeds.length}</h1> */}
       <div className="row">
         <div className="col-sm-12">
           <button className="m-2" onClick={handleButtonClick} value="AAA">AAA</button>
