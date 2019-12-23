@@ -1,6 +1,7 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext, useEffect, useRef} from 'react';
 import { FeedsContext } from '../context/feedsContext';
 import Filter from './filter';
+import Spinner from 'react-bootstrap/Spinner';
 
 
 const Shelf = () => {
@@ -73,8 +74,9 @@ const Item = ({article}) => {
     <div key={article.id} className="col-6 col-sm-4 p-1">
       <h3>{article.title}</h3>
       <img src={`${article.image}?random&img=${article.id}`} alt={article.title}></img>
+      {/* <Spinner animation="border" variant="primary" /> */}
       <p>{article.content}</p>
-  </div>
+   </div>
   )
 }
 

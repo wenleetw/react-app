@@ -3,25 +3,25 @@ import { initalContext, FeedsContext } from '../context/feedsContext';
 
 const Filter = props => {
   const [feeds, setFeeds] = useContext(FeedsContext);
-  const [nowTag, setNowTag] = useState("");
+  const [lastTag, setLastTag] = useState("");
 
   useEffect(() => {
   }, []);
- 
+
   const handleButtonClick = (event) => {
-    //console.log(nowTag)
-    if (event.target.value === nowTag) {
-      setNowTag("");
+    if (event.target.value === lastTag){
+      setLastTag("");
       setFeeds(initalContext);
       return;
     }
 
     let filtedData = feeds.newsFeeds.filter(el => {
+      //console.log(el)
       return el.tags.includes(event.target.value);
     })
-    setNowTag(event.target.value);
+    setLastTag(event.target.value);
+    //console.log(filtedData);
     setFeeds({newsFeeds: filtedData});
-
   }
 
   const handleResetClick = (event) => {
@@ -39,8 +39,10 @@ const Filter = props => {
           <button className="m-2" onClick={handleButtonClick} value="CCC">CCC</button>
           <button className="m-2" onClick={handleButtonClick} value="DDD">DDD</button>
         </div>
+        <br></br>
+        <br></br>
         <div className="col-sm-12">
-          <button className="m-2" onClick={handleResetClick}>Reset</button>
+          <button className="m-2" onClick={handleResetClick}>Reset All</button>
         </div>
       </div>
     </div>

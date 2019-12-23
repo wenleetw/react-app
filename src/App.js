@@ -4,7 +4,6 @@ import Nav from './components/nav';
 import Shelf from './components/shelf';
 import Footer from './components/footer';
 //import { FeedsContext } from './context/feedsContext';
-
 // const [feeds, setFeeds] = useState();
 
 const App = prop => {
