@@ -7,10 +7,10 @@ import Button from 'react-bootstrap/Button'
 
 const Shelf = () => {
   const initailFeeds = useContext(FeedsContext);
-  const [feeds, setFeeds] = useState(initailFeeds);
+  const [feeds, setFeeds] = useContext(FeedsContext);
 
   useEffect(() => {
-    //console.log('render');
+    console.log('render');
   }, []);
 
   const handleInputChange = (event) => {
@@ -21,6 +21,7 @@ const Shelf = () => {
       }
     })
 
+    
     //console.log(initailFeeds)
     if (event.target.value === '') {
       setTimeout(() => setFeeds(initailFeeds), 500);
@@ -30,7 +31,7 @@ const Shelf = () => {
   }
 
   return (
-    <FeedsContext.Provider value={[feeds, setFeeds]}>
+    <div>
       {/* search input */}
       <div className="container-fluid">
         <form>
@@ -57,7 +58,7 @@ const Shelf = () => {
           </div>
         </div>
       </div>
-    </FeedsContext.Provider>
+    </div>
   );
 }
 
@@ -77,7 +78,11 @@ const Item = ({article}) => {
       <h3>{article.title}</h3>
       <img src={`${article.image}`} alt={article.title}></img>
       {/* <Spinner animation="border" variant="primary" /> */}
-      <p>{article.content}</p>
+      <p>
+        {article.content}
+        <br></br>
+        <small><i>{article.tags.map((tag) => tag + ' ' )}</i></small>
+      </p>
    </div>
   )
 }

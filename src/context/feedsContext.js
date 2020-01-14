@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState, createContext} from 'react';
 
-const data = { photoFeeds:[] };
+export const FeedsContext = createContext();
+
+const data = { photoFeeds: [] };
 for (var i = 1; i < 16; i++) {
   data.photoFeeds.push({
     id: i, 
@@ -8,11 +10,25 @@ for (var i = 1; i < 16; i++) {
     content: `This is content ${i}`, 
     image: `https://picsum.photos/400/200?random&img=${Math.floor(Math.random() * 100) + 1}`, 
     tags: i%2 === 0 ? ['AAA','BBB']:['CCC','DDD']})
-} 
+}
 
 export const initalContext = data;
 
-export const FeedsContext = React.createContext(data);
+export const FeedsProvider = props => {
+
+  const [feeds, setFeeds] = useState(
+    data
+  );
+  return (
+    <FeedsContext.Provider value = {[feeds, setFeeds]}>
+      {props.children}
+    </FeedsContext.Provider>
+  )
+}
+
+
+
+//export const initalContext = data;
 
 
 // import React, { useState, createContext } from 'react';
